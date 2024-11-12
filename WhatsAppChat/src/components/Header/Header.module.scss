@@ -1,0 +1,130 @@
+.textInput {
+  border: 1px solid #f1f1f1;
+  height: 40px;
+  border-radius: 10px;
+  text-align: center;
+  width: 100%;
+}
+
+.table__searchBar {
+  border-radius: 10px;
+}
+
+.searchBoxContainer {
+  border-radius: 10px;
+  overflow: hidden;
+  padding: 5px;
+  max-height: 300px;
+  min-height: 30px;
+  overflow-y: auto;
+  width: 600px;
+}
+
+.searchBox {
+  display: flex;
+  align-items: center;
+  transition: 0.3s;
+  height: 30px;
+  cursor: pointer;
+  border: 1px solid #e8e8e8;
+
+  &:hover {
+    background-color: #e7e7e7;
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    border-right: 1px solid #e8e8e8;
+    width: 40px;
+    height: 100%;
+    justify-content: center;
+  }
+
+  &__info {
+    border-right: 1px solid #e8e8e8;
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding-left: 10px;
+  }
+
+  &__medium {
+    width: 120px;
+  }
+
+  &__large {
+    width: 300px;
+  }
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 10px;
+
+  &__button {
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      background-color: #e34d4d !important;
+    }
+  }
+}
+
+.popoverItem {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 5px;
+  transition: 0.3s;
+  cursor: pointer;
+  overflow: hidden;
+  color: black;
+  width: 100%;
+
+  &:hover {
+    background-color: lightgrey;
+    color: black;
+  }
+}
+
+.popoverFont {
+  font-size: 16px;
+}
+
+.popoverWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: center;
+  overflow: hidden;
+  width: 200px;
+  padding: 10px 0 10px 0;
+}
+
+.popoverLogo {
+  margin-top: 2px;
+}
+
+.nameWrapper {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-content: center;
+  width: 90%;
+}
+
+.chatLogo {
+  padding: 5px 10px 5px 10px;
+  transition: 0.3s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #e7e7e7;
+  }
+}

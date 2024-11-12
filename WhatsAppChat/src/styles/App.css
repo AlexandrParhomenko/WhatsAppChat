@@ -33,6 +33,11 @@
   }
 }
 
+.notFoundBox {
+  color: red;
+  padding-top: 15%;
+}
+
 .card {
   padding: 2em;
 }

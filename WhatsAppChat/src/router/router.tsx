@@ -4,23 +4,20 @@ import BaseLayout from "../pages/BaseLayout/BaseLayout.tsx";
 import NotFoundPage from "../pages/NotFoundPage/NotFoundPage.tsx";
 import AuthPage from "../pages/AuthPage/AuthPage.tsx";
 import ChatPage from "../pages/ChatPage/ChatPage.tsx";
+import ProtectedRoute from "./ProtectedRoute.tsx";
 
 export const routesConfig = [
     {
-        element: <AuthPage />,
-        index: true
-    },
-    {
-        element: <AuthPage />,
-        path: "/login"
-    },
-    {
         element: <BaseLayout />,
-        path: "/",
+        path: routes.main,
         children: [
             {
-                path: routes.main,
-                element: <ChatPage />
+                index: true,
+                element: <AuthPage />
+            },
+            {
+                path: routes.chat,
+                element: <ProtectedRoute><ChatPage /></ProtectedRoute>
             },
             {
                 path: "*",

@@ -1,1 +1,1 @@
-export const API_URL = "https://vektorfm.ru/";
+export const API_URL = "https://api.green-api.com/";

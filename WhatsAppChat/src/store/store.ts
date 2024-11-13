@@ -1,9 +1,13 @@
 import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit";
 import { setupListeners } from "@reduxjs/toolkit/query";
 import {baseApi} from "../services/apiService.ts";
+import {authSlice} from "./reducers/authSlice.ts";
+import {chatSlice} from "./reducers/chatSlice.ts";
 
 
 const rootReducer = combineReducers({
+  [authSlice.name]: authSlice.reducer,
+  [chatSlice.name]: chatSlice.reducer,
   [baseApi.reducerPath]: baseApi.reducer,
 })
 

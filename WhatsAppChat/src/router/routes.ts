@@ -1,4 +1,5 @@
 export default {
-    main: "/main",
+    main: "/",
+    chat: "/chat",
     notFound: "/404",
 };

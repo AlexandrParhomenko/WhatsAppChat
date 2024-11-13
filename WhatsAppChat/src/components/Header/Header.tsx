@@ -1,10 +1,8 @@
-import styles from "./Header.module.scss";
-
 const Header = () => {
 
   return (
-    <div className={styles.header}>
-
+    <div className={"header"}>
+        <span>WhatsApp chat</span>
     </div>
   );
 };

@@ -1,8 +1,10 @@
 {
   "files": [],
-  "include": ["src", "pages"],
+  "include": ["pages"],
   "references": [
-    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.app.json",
+      "composite": true
+    },
     { "path": "./tsconfig.node.json" }
   ]
 }

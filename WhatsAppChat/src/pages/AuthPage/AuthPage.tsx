@@ -1,14 +1,15 @@
 import {useRef} from "react";
 import {Button, Form, FormInstance, Input} from "antd";
 import InputMask from "react-input-mask";
-import {setAuthData} from "../../store/reducers/authSlice.ts";
+import {selectAuthData, setAuthData} from "../../store/reducers/authSlice.ts";
 import {Login} from "../../types/types.ts";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {useNavigate} from "react-router-dom";
 
 const AuthPage = () => {
     const ref = useRef<FormInstance>(null);
     const navigate = useNavigate();
+    const authData = useSelector(selectAuthData)
     const dispatch = useDispatch();
 
     const onAuth = (values: Login) => {
@@ -17,7 +18,7 @@ const AuthPage = () => {
     };
 
     return (
-        <div style={{height: "100%", width: "100%"}}>
+        <div className={"background"} style={{height: "100%", width: "100%"}}>
             <div className={"authWrapper"}>
                 <div className={"authWindow"}>
                     <Form scrollToFirstError={{
@@ -27,6 +28,7 @@ const AuthPage = () => {
                     }} ref={ref} tabIndex={0} onFinish={onAuth} className={"authForm"} layout={"vertical"}>
                         <Form.Item className={"authInputBar"}
                                    name={"user_id"}
+                                   initialValue={authData.user_id}
                                    hasFeedback
                                    rules={[
                                        {
@@ -40,6 +42,7 @@ const AuthPage = () => {
                         </Form.Item>
                         <Form.Item className={"authInputBar"}
                                    label={"Токен пользователя"}
+                                   initialValue={authData.user_token}
                                    name={"user_token"}
                                    hasFeedback
                                    rules={[

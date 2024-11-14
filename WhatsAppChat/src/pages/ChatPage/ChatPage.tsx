@@ -73,21 +73,17 @@ const ChatPage = () => {
             if (!notification) return
 
             if (notification.body.typeWebhook === "incomingMessageReceived" || notification.body.typeWebhook === "outgoingAPIMessageReceived" || notification.body.typeWebhook === "outgoingMessageReceived") {
-                console.log('notification', notification);
                 const notificationBody = notification.body;
-
                 const existingMessage = messages?.find(
                     (msg) => msg.idMessage === notificationBody.idMessage
                 );
                 if (existingMessage) {
                     console.log('message already in chat history');
-
                     await deleteNotification({
                         idInstance: authData.user_id,
                         apiTokenInstance: authData.user_token,
                         receiptId: notification.receiptId,
                     });
-
                     return;
                 }
 
@@ -106,7 +102,6 @@ const ChatPage = () => {
                             ? 'outgoing'
                             : 'incoming';
                         const typeMessage = notificationBody.messageData.typeMessage;
-
                         draftChatHistory.push({
                             type: type,
                             typeMessage: notificationBody.messageData.typeMessage,
@@ -121,7 +116,6 @@ const ChatPage = () => {
                             idMessage: notificationBody.idMessage,
                             chatId: notificationBody.senderData.chatId,
                         });
-
                         return draftChatHistory;
                     }
                 );
@@ -148,13 +142,8 @@ const ChatPage = () => {
                 </div>
                 <span style={{fontWeight: "bold"}}>{authData.phone}</span>
             </div>
-            <div style={{overflowY: "auto", height: "75vh", paddingTop: 10}}>
+            <div className={"messagesWindow"}>
                 <div style={{display: "flex", flexDirection: "column", rowGap: 10, paddingTop: 30, padding: "0 18%"}}>
-                    {messages.map((el, idx) => {
-                        if (el.typeMessage !== "textMessage" && el.typeMessage !== "extendedTextMessage") return null
-                        return el.type === "outgoing" ? <UserMessage key={idx} message={el}/> :
-                            <OtherUserMessage key={idx} message={el}/>
-                    })}
                     {messages.map((el, idx) => {
                         if (el.typeMessage !== "textMessage" && el.typeMessage !== "extendedTextMessage") return null
                         return el.type === "outgoing" ? <UserMessage key={idx} message={el}/> :

@@ -3,8 +3,8 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  height: 150px;
   font-size: 20px;
+  padding: 30px 0;
   background-color: #25d366;
   box-shadow: 0px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
 }
@@ -29,8 +29,6 @@
   overflow: hidden;
   display: flex;
   flex-direction: row;
-  background-image: url("../assets/background.jpg");
-  background-repeat: repeat;
 
   &__content {
     width: 100%;
@@ -56,6 +54,21 @@
   background-color: #ffffff;
   border-radius: 10px;
   padding: 30px;
+}
+
+.background {
+  background-image: url("../assets/background.jpg");
+  background-repeat: repeat;
+}
+
+.messagesWindow {
+  overflow-y: auto;
+  height: 75vh;
+  width: 64%;
+  align-self: center;
+  padding-top: 10px;
+  background-image: url("../assets/wabackground.jpg");
+  background-size: contain;
 }
 
 .authForm {
@@ -117,10 +130,11 @@
 .sendMessageBtn {
   display: flex;
   align-items: center;
+  cursor: pointer;
   justify-content: center;
   width: 40px;
   height: 40px;
-  padding-right: 20px;
+  margin-right: 20px;
   transition: 0.3s;
 
   &:hover {
@@ -196,4 +210,21 @@
   color: #c7c7c7;
   position: relative;
   top: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 0.3em;
+  height: 7px;
+  border-radius: 100vw;
+}
+
+::-webkit-scrollbar-track {
+  background: #eae2e2;
+  border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background: #939393;
+  border-radius: 100vw;
 }

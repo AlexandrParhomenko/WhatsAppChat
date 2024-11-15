@@ -8,7 +8,7 @@ import {
 import {useSelector} from "react-redux";
 import {selectAuthData} from "../../store/reducers/authSlice.ts";
 import Loader from "../../components/Loader/Loader.tsx";
-import {Input, InputRef} from "antd";
+import {Input, InputRef, message} from "antd";
 import {useEffect, useRef, useState} from "react";
 import {IoSend} from "react-icons/io5";
 import OtherUserMessage from "../../components/Messages/OtherUserMessage.tsx";
@@ -16,8 +16,10 @@ import UserMessage from "../../components/Messages/UserMessage.tsx";
 import {FaUser} from "react-icons/fa";
 import {setChat} from "../../store/reducers/chatSlice.ts";
 import {useAppDispatch} from "../../hooks";
+import {successfulResponse} from "../../utils";
 
 const ChatPage = () => {
+    const [messageApi, contextHolder] = message.useMessage();
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const messageInput = useRef<InputRef>(null);
     const [messageText, setMessageText] = useState<string>("")
@@ -42,7 +44,7 @@ const ChatPage = () => {
             message: messageText
         }
     }
-    const {data: messages} = useGetChatHistoryQuery(queryData)
+    const {data: messages, error: historyMessagesError} = useGetChatHistoryQuery(queryData)
 
     const scrollToBottom = () => {
         if (messagesEndRef.current) {
@@ -132,46 +134,56 @@ const ChatPage = () => {
         handleNotification();
     }, [notification]);
 
-    if (!messages) return <Loader/>
+    useEffect(() => {
+        if (historyMessagesError) {
+            successfulResponse(messageApi, "error", "Ошибка загрузки истории сообщений, проверьте введенные данные и повторите попытку")
+        }
+    }, [historyMessagesError])
+
+    // if (!messages) return <Loader/>
 
     return (
         <div className={"chatWindow"}>
-            <div className={"chatUserContainer"}>
-                <div className={"chatUserBar"}>
-                    <FaUser color={"#f1f1f1"} size={20}/>
+            {contextHolder}
+            {!messages ? <Loader/> : <>
+                <div className={"chatUserContainer"}>
+                    <div className={"chatUserBar"}>
+                        <FaUser color={"#f1f1f1"} size={20}/>
+                    </div>
+                    <span style={{fontWeight: "bold"}}>{authData.phone}</span>
                 </div>
-                <span style={{fontWeight: "bold"}}>{authData.phone}</span>
-            </div>
-            <div className={"messagesWindow"}>
-                <div className={"messagesBlock"}>
-                    {messages.map((el, idx) => {
-                        if (el.typeMessage !== "textMessage" && el.typeMessage !== "extendedTextMessage") return null
-                        return el.type === "outgoing" ? <UserMessage key={idx} message={el}/> :
-                            <OtherUserMessage key={idx} message={el}/>
-                    })}
-                    <div ref={messagesEndRef}></div>
+                <div className={"messagesWindow"}>
+                    <div className={"messagesBlock"}>
+                        {messages.map((el, idx) => {
+                            if (el.typeMessage !== "textMessage" && el.typeMessage !== "extendedTextMessage") return null
+                            return el.type === "outgoing" ? <UserMessage key={idx} message={el}/> :
+                                <OtherUserMessage key={idx} message={el}/>
+                        })}
+                        <div ref={messagesEndRef}></div>
+                    </div>
                 </div>
-            </div>
-            <div className={"messageInputWrapper"}>
-                <Input value={messageText} maxLength={300} onChange={(e) => setMessageText(e.target.value)}
-                       ref={messageInput}
-                       style={{padding: 20, border: "none"}}
-                       placeholder={"Введите сообщение"}
-                       onPressEnter={() => {
-                           if (messageText.trim().length > 0) {
-                               sendMessage(sendMessageQueryData);
-                               setMessageText("")
-                           }
-                       }}/>
-                {messageText.trim().length > 0 && <div onClick={() => {
-                    if (messageText.trim().length > 0) {
-                        sendMessage(sendMessageQueryData);
-                        setMessageText("")
-                    }
-                }} className={"sendMessageBtn"}>
-                    <IoSend color={"#ffbd8e"} size={20}/>
-                </div>}
-            </div>
+                <div className={"messageInputWrapper"}>
+                    <Input value={messageText} maxLength={300} onChange={(e) => setMessageText(e.target.value)}
+                           ref={messageInput}
+                           style={{padding: 20, border: "none"}}
+                           placeholder={"Введите сообщение"}
+                           onPressEnter={() => {
+                               if (messageText.trim().length > 0) {
+                                   sendMessage(sendMessageQueryData);
+                                   setMessageText("")
+                               }
+                           }}/>
+                    {messageText.trim().length > 0 && <div onClick={() => {
+                        if (messageText.trim().length > 0) {
+                            sendMessage(sendMessageQueryData);
+                            setMessageText("")
+                        }
+                    }} className={"sendMessageBtn"}>
+                        <IoSend color={"#ffbd8e"} size={20}/>
+                    </div>}
+                </div>
+            </>}
+
         </div>
     );
 };

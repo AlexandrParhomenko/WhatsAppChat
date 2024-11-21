@@ -1,0 +1,12 @@
+.notFoundBox {
+  color: red;
+  padding-top: 15%;
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}

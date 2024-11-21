@@ -1,0 +1,254 @@
+.header {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  padding: 30px 0;
+  background-color: #25d366;
+  box-shadow: 0px -5px 5px -5px rgba(34, 60, 80, 0.6) inset;
+}
+
+.submitBtn {
+  height: 40px;
+  padding: 0 30px;
+  text-transform: uppercase;
+  background-color: #25d366;
+  color: white;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #2af578 !important;
+    color: white !important;
+    border-color: white !important;
+  }
+}
+
+.base {
+  display: flex;
+  flex-direction: row;
+
+  &__content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.authWrapper {
+  background-size: cover;
+  background-position: center;
+  height: calc(100vh - 90px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.authWindow {
+  width: 25vw;
+  min-width: 250px;
+  -webkit-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  background-color: #ffffff;
+  border-radius: 10px;
+  padding: 30px;
+}
+
+.background {
+  background-image: url("../assets/background.jpg");
+  background-repeat: repeat;
+}
+
+.messagesWindow {
+  overflow-y: auto;
+  height: 75vh;
+  width: 100%;
+  margin-right: 5px;
+  align-self: center;
+  padding-top: 10px;
+}
+
+.messagesBlock {
+  display: flex;
+  flex-direction: column;
+  row-gap: 10px;
+  padding: 0 18%;
+}
+
+.authForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  row-gap: 10px;
+}
+
+.authInputBar {
+  width: 100%;
+}
+
+.phoneInput {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 4px 11px;
+  color: rgba(0, 0, 0, 0.88);
+  font-size: 14px;
+  line-height: 1.5714285714285714;
+  list-style: none;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  min-width: 0;
+  background-color: #ffffff;
+  background-image: none;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #d9d9d9;
+  border-radius: 6px;
+  transition: all 0.2s;
+
+  &:focus-visible {
+    outline: none;
+    border-color: #25d366;
+    box-shadow: unset;
+  }
+
+  &:focus {
+    border-color: #25d366;
+    box-shadow: unset;
+  }
+
+  &:hover {
+    border-color: #25d366;
+    box-shadow: unset;
+  }
+}
+
+.spinner {
+  display: flex;
+  padding-left: 50%;
+  padding-top: 20%;
+  color: #25d366;
+}
+
+.sendMessageBtn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-right: 20px;
+  transition: 0.3s;
+
+  &:hover {
+    background-color: #e7e7e7;
+    border-radius: 50px;
+  }
+}
+
+.userMessage {
+  color: black;
+  align-self: flex-end;
+  background-color: #7fffb1;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 10px 10px 0 10px;
+  padding: 8px;
+  text-align: right;
+}
+
+.userMessageDate {
+  margin: 10px 0 0 10px;
+  font-size: 10px;
+  color: #424242;
+  position: relative;
+  top: 5px;
+}
+
+.chatUserBar {
+  border-radius: 50px;
+  background-color: #d9d9d9;
+  height: 50px;
+  width: 50px;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chatUserContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  column-gap: 10px;
+  cursor: pointer;
+  width: 100%;
+  border-radius: 10px;
+  align-self: center;
+  background-color: white;
+}
+
+.messageInputWrapper {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10px;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.otherUserMessage {
+  background-color: white;
+  align-self: flex-start;
+  color: #313131;
+  border-radius: 10px 10px 10px 0;
+  padding: 8px;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.25);
+  text-align: left;
+}
+
+.otherUserMessageDate {
+  margin: 10px 0 0 10px;
+  font-size: 10px;
+  color: #c7c7c7;
+  position: relative;
+  top: 5px;
+}
+
+::-webkit-scrollbar {
+  width: 0.3em;
+  height: 7px;
+  border-radius: 100vw;
+}
+
+::-webkit-scrollbar-track {
+  background: #eae2e2;
+  border-radius: 100vw;
+}
+
+::-webkit-scrollbar-thumb {
+  cursor: pointer;
+  background: #939393;
+  border-radius: 100vw;
+}
+
+.chatWindow {
+  -webkit-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  -moz-box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  box-shadow: 0 5px 10px 2px rgba(34, 60, 80, 0.2);
+  background-image: url("../assets/wabackground.jpg");
+  background-size: contain;
+  align-self: center;
+  width: 64%;
+  min-height: calc(100vh - 90px);
+  display: flex;
+  border-radius: 20px;
+  overflow: hidden;
+  flex-direction: column;
+}
+
+@media (max-width: 1200px) {
+  .chatWindow {
+    width: 100%;
+  }
+}

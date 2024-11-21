@@ -1,7 +1,7 @@
 import {
     chatEndpoints,
     useDeleteNotificationMutation,
-    useGetChatHistoryQuery,
+    useGetChatHistoryQuery, useGetSettingsQuery,
     useReceiveNotificationQuery,
     useSetNewMessageMutation
 } from "../../services/chatEndpoints.ts";
@@ -25,9 +25,9 @@ const ChatPage = () => {
     const [messageText, setMessageText] = useState<string>("")
     const [sendMessage] = useSetNewMessageMutation()
     const dispatch = useAppDispatch()
-    // const chat = useSelector(selectChat)
     const authData = useSelector(selectAuthData)
     let chatId = `${authData.phone.replaceAll(/\D/g, "")}@c.us`
+    const {data: settings} = useGetSettingsQuery({idInstance: authData.user_id, apiTokenInstance: authData.user_token})
     const queryData = {
         idInstance: authData.user_id,
         apiTokenInstance: authData.user_token,
@@ -45,7 +45,6 @@ const ChatPage = () => {
         }
     }
     const {data: messages, error: historyMessagesError} = useGetChatHistoryQuery(queryData)
-
     const scrollToBottom = () => {
         if (messagesEndRef.current) {
             messagesEndRef.current.scrollIntoView({behavior: "instant"});
@@ -73,8 +72,8 @@ const ChatPage = () => {
     useEffect(() => {
         async function handleNotification() {
             if (!notification) return
-
-            if (notification.body.typeWebhook === "incomingMessageReceived" || notification.body.typeWebhook === "outgoingAPIMessageReceived" || notification.body.typeWebhook === "outgoingMessageReceived") {
+            console.log()
+            if ((notification.body.typeWebhook === "incomingMessageReceived" || notification.body.typeWebhook === "outgoingAPIMessageReceived" || notification.body.typeWebhook === "outgoingMessageReceived") && notification.body.senderData.chatId === chatId) {
                 const notificationBody = notification.body;
                 const existingMessage = messages?.find(
                     (msg) => msg.idMessage === notificationBody.idMessage
@@ -140,12 +139,16 @@ const ChatPage = () => {
         }
     }, [historyMessagesError])
 
-    // if (!messages) return <Loader/>
+    useEffect(() => {
+        if (settings && (settings.outgoingAPIMessageWebhook !== "yes" || settings.incomingWebhook !== "yes" || settings.outgoingMessageWebhook !== "yes")) {
+            successfulResponse(messageApi, "info", "В настройках инстанса отключены уведомления, без этой настройки приложение не сможет получить входящие сообщения")
+        }
+    }, [chatId])
 
     return (
         <div className={"chatWindow"}>
             {contextHolder}
-            {!messages ? <Loader/> : <>
+            {!messages || !settings ? <Loader/> : <>
                 <div className={"chatUserContainer"}>
                     <div className={"chatUserBar"}>
                         <FaUser color={"#f1f1f1"} size={20}/>

@@ -3,7 +3,7 @@ import {
     ChatHistoryQueryData, DeleteNotificationParameters, InstanceInterface,
     Message,
     ReceiveNotificationResponseInterface, ResultResponseInterface,
-    SendMessageQueryData
+    SendMessageQueryData, Settings
 } from "../types/types.ts";
 
 export const chatEndpoints = baseApi.injectEndpoints({
@@ -17,7 +17,7 @@ export const chatEndpoints = baseApi.injectEndpoints({
             transformResponse: (response: Message[]) => {
                 return response.reverse();
             },
-            providesTags: () => ["ChatHistory"]
+            providesTags: () => ["ChatHistory"],
         }),
         setNewMessage: builder.mutation<SendMessageQueryData, SendMessageQueryData>({
             query: (data) => ({
@@ -38,6 +38,11 @@ export const chatEndpoints = baseApi.injectEndpoints({
                 method: 'DELETE',
             }),
         }),
+        getSettings: builder.query<Settings, {idInstance: string, apiTokenInstance: string}>({
+            query: (data) => ({
+                url: `waInstance${data.idInstance}/getSettings/${data.apiTokenInstance}`,
+            }),
+        }),
     })
 });
 
@@ -45,6 +50,7 @@ export const {
     useGetChatHistoryQuery,
     useSetNewMessageMutation,
     useReceiveNotificationQuery,
-    useDeleteNotificationMutation
+    useDeleteNotificationMutation,
+    useGetSettingsQuery
 } = chatEndpoints;
 

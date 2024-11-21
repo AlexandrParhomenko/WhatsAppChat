@@ -10,6 +10,7 @@ export const baseApi = createApi({
   endpoints: () => ({}),
   tagTypes: [
     "ChatHistory",
+    "Settings"
   ]
 });
 

@@ -143,7 +143,7 @@ const ChatPage = () => {
         if (settings && (settings.outgoingAPIMessageWebhook !== "yes" || settings.incomingWebhook !== "yes" || settings.outgoingMessageWebhook !== "yes")) {
             successfulResponse(messageApi, "info", "В настройках инстанса отключены уведомления, без этой настройки приложение не сможет получить входящие сообщения")
         }
-    }, [chatId])
+    }, [chatId, settings])
 
     return (
         <div className={"chatWindow"}>

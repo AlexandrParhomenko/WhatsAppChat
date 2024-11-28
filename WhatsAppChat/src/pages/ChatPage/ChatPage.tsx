@@ -64,7 +64,7 @@ const ChatPage = () => {
             idInstance: authData.user_id,
             apiTokenInstance: authData.user_token,
         },
-        {pollingInterval: 5000, skipPollingIfUnfocused: true}
+        {pollingInterval: 500, skipPollingIfUnfocused: true}
     );
 
     const [deleteNotification] = useDeleteNotificationMutation();
